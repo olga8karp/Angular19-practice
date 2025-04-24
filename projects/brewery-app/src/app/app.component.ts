@@ -1,13 +1,12 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent, CityInputComponent, ModalContentComponent } from '../../../shared-lib/src/app/components';
+import { HeaderComponent, CityInputComponent } from '../../../shared-lib/src/app/components';
 import { BreweryService, Brewery } from './services/brewery.service';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialogModule } from '@angular/material/dialog';
-import {ModalService} from '../../../shared-lib/src/app/services';
-import {BreweryModalComponent} from './components/modal/brewery-modal.component';
+import { BreweryModalComponent } from './components/modal/brewery-modal.component';
 
 @Component({
   selector: 'app-root',
@@ -36,8 +35,7 @@ export class AppComponent {
   isModalOpen = false;
 
   constructor(
-    private breweryService: BreweryService,
-    private modalService: ModalService
+    private breweryService: BreweryService
   ) {}
 
   onCitySelected(cityId: string) {

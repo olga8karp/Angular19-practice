@@ -16,10 +16,10 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrls: ['./brewery-modal.component.css']
 })
 export class BreweryModalComponent {
-  @Input() brewery!: Brewery;
-  @Output() close = new EventEmitter<any>();
+  @Input() brewery: Brewery | null = null;
+  @Output() close = new EventEmitter<void>();
 
-  onClose(result?: any) {
-    this.close.emit(result);
+  onClose(): void {
+    this.close.emit();
   }
 }

@@ -240,25 +240,7 @@ export class CitiesService {
     { name: "Yonkers", id: "yonkers" }
   ];
 
-  constructor() { }
-
-  /**
-   * Get all cities
-   * @returns Observable of City array
-   */
   getCities(): Observable<City[]> {
     return of(this.cities);
-  }
-
-  /**
-   * Filter cities by name
-   * @param filterValue The value to filter by
-   * @returns Filtered array of cities
-   */
-  filterCities(filterValue: string): City[] {
-    const value = filterValue.toLowerCase();
-    return this.cities.filter(city =>
-      city.name.toLowerCase().includes(value)
-    );
   }
 }

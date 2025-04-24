@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { Observable } from 'rxjs';
 
 export interface Brewery {
   id: string;
@@ -35,35 +35,7 @@ export class BreweryService {
 
   constructor(private http: HttpClient) { }
 
-  getBreweries(): Observable<Brewery[]> {
-    return this.http.get<Brewery[]>(this.apiUrl);
-  }
-
   searchBreweriesByCity(city: string, page: number = 1): Observable<Brewery[]> {
     return this.http.get<Brewery[]>(`${this.apiUrl}?by_city=${city}&per_page=10&page=${page}`);
-  }
-
-  // Method to extract unique cities from all breweries
-  getAllCities(): Observable<City[]> {
-    // Get all breweries (this might need pagination for a real app with lots of data)
-    return this.getBreweries().pipe(
-      map(breweries => {
-        // Extract unique cities
-        const uniqueCities = new Map<string, City>();
-
-        breweries.forEach(brewery => {
-          if (brewery.city && !uniqueCities.has(brewery.city.toLowerCase())) {
-            uniqueCities.set(brewery.city.toLowerCase(), {
-              name: brewery.city, // Human readable name
-              id: brewery.city.toLowerCase().replace(/\s+/g, '_') // Underscore-separated id
-            });
-          }
-        });
-
-        // Convert Map to array and sort alphabetically
-        return Array.from(uniqueCities.values())
-          .sort((a, b) => a.name.localeCompare(b.name));
-      })
-    );
   }
 }

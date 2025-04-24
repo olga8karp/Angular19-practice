@@ -6,7 +6,9 @@
     "start": "ng serve brewery-app",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "format": "npx prettier --write \"**/*.{ts,js,html,scss,css,json}\"",
+    "format:check": "npx prettier --check \"**/*.{ts,js,html,scss,css,json}\""
   },
   "private": true,
   "dependencies": {
@@ -32,6 +34,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "prettier": "^3.2.5",
     "typescript": "~5.7.2"
   }
 }

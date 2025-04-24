@@ -54,6 +54,31 @@ ng e2e
 
 Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
 
+## Code Formatting
+
+This project uses [Prettier](https://prettier.io/) for consistent code formatting. The configuration ensures proper spacing in ES imports (spaces between curly braces) and enforces consistent code style.
+
+### Prettier Configuration
+
+The main formatting rules include:
+- Single quotes for strings
+- Spaces between curly braces in imports
+- 100 character line width
+- 2 space indentation
+- Trailing commas in multi-line structures
+
+To format all files in the project:
+
+```bash
+npm run format
+```
+
+To check if files are properly formatted without making changes:
+
+```bash
+npm run format:check
+```
+
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.

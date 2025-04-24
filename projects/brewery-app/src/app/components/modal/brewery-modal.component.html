@@ -1,0 +1,17 @@
+<div class="backdrop" (click)="onClose()"></div>
+<div class="modal">
+  <div>
+    <mat-chip class="avatar-chip" selected>
+      {{ brewery.name.at(0) }}
+    </mat-chip>
+    {{ brewery.name }}
+    <button mat-icon-button (click)="onClose()" aria-label="Close modal">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <p><mat-icon>star</mat-icon> Type {{ brewery.brewery_type }}</p>
+  <p><mat-icon>public</mat-icon> Website {{ brewery.website_url }}</p>
+  <div class="modal-footer">
+    <button mat-raised-button (click)="onClose('Confirmed')">Done</button>
+  </div>
+</div>

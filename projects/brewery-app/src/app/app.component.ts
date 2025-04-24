@@ -2,11 +2,12 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent, CityInputComponent, ModalContentComponent } from '../../../shared-lib/src/app/components';
 import { BreweryService, Brewery } from './services/brewery.service';
-import { ModalService } from '../../../shared-lib/src/app/services';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialogModule } from '@angular/material/dialog';
+import {ModalService} from '../../../shared-lib/src/app/services';
+import {BreweryModalComponent} from './components/modal/brewery-modal.component';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatCardModule,
     MatButtonModule,
     MatProgressSpinnerModule,
-    MatDialogModule
+    MatDialogModule,
+    BreweryModalComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
@@ -31,6 +33,7 @@ export class AppComponent {
   currentCity = '';
   hasMoreItems = false;
   selectedBrewery: Brewery | null = null;
+  isModalOpen = false;
 
   constructor(
     private breweryService: BreweryService,
@@ -83,48 +86,10 @@ export class AppComponent {
   showMoreInfo(brewery: Brewery) {
     this.selectedBrewery = brewery;
     console.log('Show more info for:', brewery.name);
+    this.isModalOpen = true;
+  }
 
-    // Create elements for the modal content
-    const headerElement = document.createElement('div');
-    headerElement.innerHTML = `<h2 style="margin: 0;">${brewery.name}</h2>`;
-
-    const bodyElement = document.createElement('div');
-    bodyElement.innerHTML = `
-      <div class="brewery-details">
-        <p><strong>Type:</strong> ${brewery.brewery_type}</p>
-        ${brewery.street ? `<p><strong>Street:</strong> ${brewery.street}</p>` : ''}
-        <p><strong>Location:</strong> ${brewery.city}, ${brewery.state} ${brewery.postal_code}</p>
-        ${brewery.phone ? `<p><strong>Phone:</strong> ${brewery.phone}</p>` : ''}
-        ${brewery.website_url ? `<p><strong>Website:</strong> <a href="${brewery.website_url}" target="_blank">${brewery.website_url}</a></p>` : ''}
-      </div>
-    `;
-
-    const footerElement = document.createElement('div');
-    footerElement.innerHTML = `
-      <button mat-raised-button color="primary" class="view-details-button">
-        View details
-      </button>
-    `;
-
-    // Open the modal
-    const dialogRef = this.modalService.openFullScreenModal({
-      headerContent: headerElement,
-      bodyContent: bodyElement,
-      footerContent: footerElement
-    });
-
-    // Add a class to the dialog for styling and add event listener to the button
-    dialogRef.afterOpened().subscribe(() => {
-      // Add styles to the button and add click event listener
-      const buttons = document.querySelectorAll('.cdk-overlay-container .mat-dialog-container button');
-      buttons.forEach(button => {
-        if (button.textContent?.trim() === 'View details') {
-          button.classList.add('view-details-button');
-          button.addEventListener('click', () => {
-            dialogRef.close();
-          });
-        }
-      });
-    });
+  closeModal() {
+    this.isModalOpen = false;
   }
 }

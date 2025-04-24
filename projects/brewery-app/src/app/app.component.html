@@ -46,3 +46,7 @@
     }
   }
 </div>
+
+@if (isModalOpen) {
+  <app-brewery-modal (close)="closeModal()" [brewery]="selectedBrewery"></app-brewery-modal>
+}

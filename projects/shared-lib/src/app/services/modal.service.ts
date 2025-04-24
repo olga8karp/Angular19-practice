@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Dialog, DialogConfig, DialogRef } from '@angular/cdk/dialog';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { ModalContentComponent, ModalData } from '../components/modal/modal-content/modal-content.component';
-import { BasePortalOutlet } from '@angular/cdk/portal';
 
 /**
  * Modal size options
@@ -36,7 +35,7 @@ export interface ModalOptions {
   providedIn: 'root'
 })
 export class ModalService {
-  constructor(private dialog: Dialog) {}
+  constructor(private dialog: MatDialog) {}
 
   /**
    * Opens a modal dialog with the specified content and options
@@ -45,7 +44,7 @@ export class ModalService {
    * @returns A reference to the dialog
    */
   openModal(data: ModalData, options: ModalOptions = {}) {
-    const dialogConfig = new DialogConfig<unknown, DialogRef<unknown, ModalContentComponent>, BasePortalOutlet>();
+    const dialogConfig = new MatDialogConfig();
 
     // Set default options
     const size = options.size || ModalSize.MEDIUM;
@@ -67,9 +66,9 @@ export class ModalService {
         break;
       case ModalSize.FULLSCREEN:
         dialogConfig.width = '100%';
-        dialogConfig.height = 'calc(100% - 64px)'; // Subtract header height
+        dialogConfig.height = '100%'; // Full height of the screen
         dialogConfig.maxWidth = '100%';
-        dialogConfig.maxHeight = 'calc(100% - 64px)';
+        dialogConfig.maxHeight = '100%';
         break;
     }
 
@@ -98,7 +97,7 @@ export class ModalService {
     // Set data
     dialogConfig.data = data;
 
-    return this.dialog.open<unknown, ModalData, ModalContentComponent>(ModalContentComponent, dialogConfig);
+    return this.dialog.open<ModalContentComponent, ModalData>(ModalContentComponent, dialogConfig);
   }
 
   /**
@@ -147,11 +146,23 @@ export class ModalService {
    * @returns A reference to the dialog
    */
   openFullScreenModal(data: ModalData, options: Partial<ModalOptions> = {}) {
-    return this.openModal(data, {
-      ...options,
-      size: ModalSize.FULLSCREEN,
-      position: ModalPosition.BOTTOM,
-      panelClass: 'fullscreen-modal'
-    });
+    const dialogConfig = new MatDialogConfig();
+
+    // Set size to fullscreen
+    dialogConfig.width = '100%';
+    dialogConfig.height = 'calc(100% - 64px)'; // Full height minus header height
+    dialogConfig.maxWidth = '100%';
+    dialogConfig.maxHeight = 'calc(100% - 64px)';
+
+    // Position below header
+    dialogConfig.position = { top: '64px', left: '0', right: '0' };
+
+    // Set panel class
+    dialogConfig.panelClass = options.panelClass || 'fullscreen-modal';
+
+    // Set data
+    dialogConfig.data = data;
+
+    return this.dialog.open<ModalContentComponent, ModalData>(ModalContentComponent, dialogConfig);
   }
 }

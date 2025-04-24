@@ -9,6 +9,32 @@
 
 .avatar-chip {
   background-color: #EADDFF;
+  margin-left: 0.5rem;
+}
+
+.section-icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 0;
+  padding-right: 2rem;
+}
+
+.section-icon {
+  color: #ccc;
+  margin-left: 0;
+}
+
+.section-container {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.section-content {
+  display: flex;
+  flex-direction: column;
+  padding-left: 1rem;
+  height: 2rem;
 }
 
 .modal {
@@ -22,12 +48,23 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   box-sizing: border-box;
   width: 100%;
+  z-index: 1;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h3 {
+    font-size: 1.5rem;
+    font-weight: 400;
+  }
 }
 
 .modal-footer {
   position: fixed;
   bottom: 2rem;
-  padding: 0 3rem;
   box-sizing: border-box;
   width: 100%;
   display: flex;
@@ -35,8 +72,16 @@
 }
 
 button[mat-raised-button] {;
-  color: white;
+  color: #fff;
   background-color: #65558F;
   border-radius: 9999px;
-  width: 100%;
+  width: calc(100% - 2rem);
+}
+
+.avatar-chip {
+  margin-right: 1rem;
+  background-color: #eaddff !important;
+  padding: 0.5rem;
+  border-radius: 9999px;
+  font-size: 2rem !important;
 }

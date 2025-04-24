@@ -39,8 +39,8 @@ export class BreweryService {
     return this.http.get<Brewery[]>(this.apiUrl);
   }
 
-  searchBreweriesByCity(city: string): Observable<Brewery[]> {
-    return this.http.get<Brewery[]>(`${this.apiUrl}?by_city=${city}&per_page=10`);
+  searchBreweriesByCity(city: string, page: number = 1): Observable<Brewery[]> {
+    return this.http.get<Brewery[]>(`${this.apiUrl}?by_city=${city}&per_page=10&page=${page}`);
   }
 
   // Method to extract unique cities from all breweries

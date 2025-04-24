@@ -14,6 +14,9 @@ export class AppComponent {
   breweries: Brewery[] = [];
   loading = false;
   noResults = false;
+  currentPage = 1;
+  currentCity = '';
+  hasMoreItems = false;
 
   constructor(private breweryService: BreweryService) {}
 
@@ -21,17 +24,41 @@ export class AppComponent {
     this.loading = true;
     this.noResults = false;
     this.breweries = [];
+    this.currentPage = 1;
+    this.currentCity = cityId;
 
-    this.breweryService.searchBreweriesByCity(cityId).subscribe(
+    this.breweryService.searchBreweriesByCity(cityId, this.currentPage).subscribe(
       (data) => {
         this.breweries = data;
         this.loading = false;
         this.noResults = data.length === 0;
+        this.hasMoreItems = data.length === 10; // If we got 10 items, there might be more
       },
       (error) => {
         console.error('Error fetching breweries:', error);
         this.loading = false;
         this.noResults = true;
+        this.hasMoreItems = false;
+      }
+    );
+  }
+
+  loadMore() {
+    if (!this.currentCity || this.loading || !this.hasMoreItems) return;
+
+    this.loading = true;
+    this.currentPage++;
+
+    this.breweryService.searchBreweriesByCity(this.currentCity, this.currentPage).subscribe(
+      (data) => {
+        this.breweries = [...this.breweries, ...data];
+        this.loading = false;
+        this.hasMoreItems = data.length === 10; // If we got 10 items, there might be more
+      },
+      (error) => {
+        console.error('Error fetching more breweries:', error);
+        this.loading = false;
+        this.currentPage--; // Revert page increment on error
       }
     );
   }

@@ -4,7 +4,10 @@
 
 <div class="brewery-results">
   @if (loading) {
-    <div class="loading">Loading breweries...</div>
+    <div class="loading">
+      <mat-spinner diameter="40"></mat-spinner>
+      <p>Loading breweries...</p>
+    </div>
   }
   @if (noResults) {
     <div class="no-results">No breweries found for this city.</div>
@@ -13,32 +16,30 @@
   @if (breweries.length > 0) {
     <div class="brewery-list">
       @for (brewery of breweries; track brewery.id) {
-        <div class="brewery-card">
-          <h3>{{ brewery.name }}</h3>
-          @if (brewery.brewery_type) {
-            <p>Type: {{ brewery.brewery_type }}</p>
-          }
-          @if (brewery.street) {
-            <p>{{ brewery.street }}</p>
-          }
-          <p>{{ brewery.city }}, {{ brewery.state }} {{ brewery.postal_code }}</p>
-          @if (brewery.phone) {
-            <p>Phone: {{ brewery.phone }}</p>
-          }
-          @if (brewery.website_url) {
-            <a [href]="brewery.website_url" target="_blank">Visit Website</a>
-          }
-        </div>
+        <mat-card class="brewery-card">
+          <mat-card-header>
+            <mat-card-title>{{ brewery.name }}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="card-content">
+            @if (brewery.street) {
+              <p>{{ brewery.street }}</p>
+            }
+            <p>{{ brewery.city }}, {{ brewery.state }} {{ brewery.postal_code }}</p>
+          </mat-card-content>
+          <mat-card-actions class="card-actions">
+            <button mat-raised-button color="primary" (click)="showMoreInfo(brewery)">View details</button>
+          </mat-card-actions>
+        </mat-card>
       }
     </div>
 
     @if (hasMoreItems) {
       <div class="load-more-container">
-        <button class="load-more-button" (click)="loadMore()" [disabled]="loading">
+        <button mat-raised-button color="basic" (click)="loadMore()" [disabled]="loading">
           @if (loading) {
             Loading more...
           } @else {
-            Load More
+            Load more
           }
         </button>
       </div>

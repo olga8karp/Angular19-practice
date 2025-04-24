@@ -2,10 +2,20 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent, CityInputComponent } from '../../../shared-lib/src/app/components';
 import { BreweryService, Brewery } from './services/brewery.service';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, HeaderComponent, CityInputComponent],
+  imports: [
+    CommonModule,
+    HeaderComponent,
+    CityInputComponent,
+    MatCardModule,
+    MatButtonModule,
+    MatProgressSpinnerModule
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
@@ -17,6 +27,7 @@ export class AppComponent {
   currentPage = 1;
   currentCity = '';
   hasMoreItems = false;
+  selectedBrewery: Brewery | null = null;
 
   constructor(private breweryService: BreweryService) {}
 
@@ -61,5 +72,11 @@ export class AppComponent {
         this.currentPage--; // Revert page increment on error
       }
     );
+  }
+
+  showMoreInfo(brewery: Brewery) {
+    this.selectedBrewery = brewery;
+    console.log('Show more info for:', brewery.name);
+    // Modal implementation will be added later
   }
 }

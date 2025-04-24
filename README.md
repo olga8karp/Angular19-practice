@@ -1,5 +1,12 @@
 # GeckotechFrontendAssessment
 
+Time spent
+
+Initial setup and planning, reviewing requirements and bootstrapping the workspace with app and lib - 1 hour 15 mins (11:45 - 12:30)
+Creating shared components and logic to load and display the list of breweries - 3 hours (12:30 - 15:30)
+Break - 45 mins (15:30 - 16:15)
+Implementing the remaining functionality and the modal - 2 hours 15 mins (16:15 - 18:30) Note: attempted to implement reusable modal with content projection for headr body and footer but encountered issues and had to revert/redo
+
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.9.
 
 ## Development server

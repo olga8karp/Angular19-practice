@@ -1,0 +1,38 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+mat-toolbar {
+  display: flex;
+  align-items: center;
+  background-color: #FEF7FF;
+}
+
+button {
+  margin-left: 8px;
+}
+
+mat-icon {
+  color: black;
+}
+
+span {
+  color: black;
+}
+
+/*
+  Note: The following properties use placeholder values.
+  Replace with actual design tokens if available:
+  - font-family: Title Large/Font
+  - font-size: Title Large/Size
+  - line-height: Title Large/Line Height
+  - letter-spacing: Title Large/Tracking
+*/
+.header-title {
+  font-family: sans-serif;
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 1.5;
+  letter-spacing: 0.15px;
+  text-align: center;
+}

@@ -1,0 +1,17 @@
+<div class="city-input-container">
+  <mat-form-field appearance="fill" class="city-input-field">
+    <mat-label>{{ label }}</mat-label>
+    <input type="text"
+           [placeholder]="placeholder"
+           matInput
+           [formControl]="cityControl"
+           [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+      @for (city of filteredCities | async; track city.id) {
+        <mat-option [value]="city">
+          {{ city?.name || '' }}
+        </mat-option>
+      }
+    </mat-autocomplete>
+  </mat-form-field>
+</div>

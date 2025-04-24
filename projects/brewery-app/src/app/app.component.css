@@ -86,9 +86,45 @@ button[mat-raised-button][color="basic"]:disabled {
   padding: 8px;
 }
 
+/* Styles for the brewery details in the modal */
+.brewery-details {
+  padding: 16px;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.brewery-details p {
+  margin: 10px 0;
+  color: #333;
+}
+
+.brewery-details a {
+  color: #65558F;
+  text-decoration: none;
+}
+
+.brewery-details a:hover {
+  text-decoration: underline;
+}
+
+/* Ensure the button in the modal footer has the same styles */
+.fullscreen-modal .view-details-button {
+  background-color: #65558F;
+  color: white;
+  border-radius: 9999px;
+  padding: 8px 24px;
+  font-size: 1rem;
+  margin: 16px 0;
+}
+
+.fullscreen-modal .view-details-button:hover {
+  background-color: #534679;
+}
+
 /* Media query for mobile resolution */
 @media screen and (max-width: 600px) {
-  button[mat-raised-button][color="primary"] {
+  button[mat-raised-button][color="primary"],
+  .fullscreen-modal .view-details-button {
     width: 90%; /* Make button take more horizontal space on mobile */
   }
 }

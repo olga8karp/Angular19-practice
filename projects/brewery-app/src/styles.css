@@ -4,3 +4,15 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Fullscreen modal styles */
+.fullscreen-modal .mat-mdc-dialog-container {
+  padding: 0;
+}
+
+.fullscreen-modal .mat-mdc-dialog-surface {
+  background-color: white;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+
+}

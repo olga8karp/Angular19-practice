@@ -26,6 +26,7 @@ import {
 })
 export class BreweryModalComponent {
   @Input() brewery: Brewery | null = null;
+  @Input() isOpen: boolean = false;
   @Output() close = new EventEmitter<void>();
 
   onClose(): void {

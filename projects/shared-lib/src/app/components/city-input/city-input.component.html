@@ -1,8 +1,8 @@
 <div class="city-input-container">
   <mat-form-field appearance="fill" class="city-input-field">
-    <mat-label>{{ label }}</mat-label>
+    <mat-label>{{ label() }}</mat-label>
     <input type="text"
-           [placeholder]="placeholder"
+           [placeholder]="placeholder()"
            matInput
            [formControl]="cityControl"
            [matAutocomplete]="auto">

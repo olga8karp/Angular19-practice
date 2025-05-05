@@ -1,19 +1,114 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global styles and theme configuration */
 @import '@angular/material/prebuilt-themes/indigo-pink.css';
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* CSS Variables for consistent styling */
+:root {
+  /* Colors */
+  --primary-color: #65558F;
+  --primary-color-dark: #534679;
+  --basic-color: #757575;
+  --basic-color-dark: #616161;
+  --basic-color-disabled: #bdbdbd;
+  --text-color: #333;
+  --text-color-secondary: #666;
+  --background-color: #fff;
+  --border-radius: 4px;
+  --border-radius-full: 9999px;
+  --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --box-shadow-elevated: 0 2px 10px rgba(0, 0, 0, 0.3);
 
-/* Fullscreen modal styles */
-.fullscreen-modal .mat-mdc-dialog-container {
-  padding: 0;
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+
+  /* Transitions */
+  --transition-standard: 0.2s ease-in-out;
 }
 
-.fullscreen-modal .mat-mdc-dialog-surface {
-  background-color: white;
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
+/* Global styles */
+html, body {
   height: 100%;
-  width: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* Global button styles */
+button[mat-raised-button][color="primary"] {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+  border-radius: var(--border-radius-full) !important;
+  transition: transform var(--transition-standard) !important;
+}
+
+button[mat-raised-button][color="primary"]:hover:not(:disabled) {
+  background-color: var(--primary-color-dark) !important;
+  transform: translateY(-2px) !important;
+}
+
+button[mat-raised-button][color="basic"] {
+  background-color: var(--basic-color) !important;
+  color: white !important;
+  border-radius: var(--border-radius-full) !important;
+  transition: transform var(--transition-standard) !important;
+}
+
+button[mat-raised-button][color="basic"]:hover:not(:disabled) {
+  background-color: var(--basic-color-dark) !important;
+  transform: translateY(-2px) !important;
+}
+
+button[mat-raised-button][color="basic"]:disabled {
+  background-color: var(--basic-color-disabled) !important;
+}
+
+/* Common layout styles */
+.container {
+  margin: var(--spacing-md);
+  padding: var(--spacing-md);
+  background-color: var(--background-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Card styles */
+.card {
+  transition: transform var(--transition-standard);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card-content {
+  flex: 1;
+  overflow: auto;
+}
+
+.card-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: auto;
+  padding: var(--spacing-xs);
+}
+
+/* Responsive breakpoints */
+@media screen and (max-width: 600px) {
+  .container {
+    margin: var(--spacing-xs);
+    padding: var(--spacing-xs);
+  }
 }

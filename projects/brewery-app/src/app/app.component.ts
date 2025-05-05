@@ -75,12 +75,11 @@ export class AppComponent {
     this.breweryService.searchBreweriesByCity(this.currentCity, this.currentPage).subscribe({
       next: (data) => {
         this.breweries = [...this.breweries, ...data];
-        this.loading = false;
         this.hasMoreItems = data.length === 10; // If we got 10 items, there might be more
       },
       error: (error) => {
         console.error('Error fetching more breweries:', error);
-        this.loading = false;
+        this.currentPage--;
       },
       complete: () => {
         this.loading = false;

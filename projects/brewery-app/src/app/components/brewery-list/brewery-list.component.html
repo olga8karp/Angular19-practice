@@ -1,0 +1,44 @@
+<div class="brewery-results">
+  @if (loading()) {
+    <div class="loading">
+      <mat-spinner diameter="40"></mat-spinner>
+      <p>Loading breweries...</p>
+    </div>
+  }
+  @if (noResults()) {
+    <div class="no-results">No breweries found for this city.</div>
+  }
+
+  @if (breweries().length > 0) {
+    <div class="brewery-list">
+      @for (brewery of breweries(); track brewery.id) {
+        <mat-card class="brewery-card">
+          <mat-card-header>
+            <mat-card-title>{{ brewery.name }}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="card-content">
+            @if (brewery.street) {
+              <p>{{ brewery.street }}</p>
+            }
+            <p>{{ brewery.city }}, {{ brewery.state }} {{ brewery.postal_code }}</p>
+          </mat-card-content>
+          <mat-card-actions class="card-actions">
+            <button mat-raised-button color="primary" (click)="showMoreInfo(brewery)">View details</button>
+          </mat-card-actions>
+        </mat-card>
+      }
+    </div>
+
+    @if (hasMoreItems()) {
+      <div class="load-more-container">
+        <button mat-raised-button color="basic" (click)="loadMoreItems()" [disabled]="loading()">
+          @if (loading()) {
+            Loading more...
+          } @else {
+            Load more
+          }
+        </button>
+      </div>
+    }
+  }
+</div>

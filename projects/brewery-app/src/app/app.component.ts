@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BreweryModalComponent } from './components/modal/brewery-modal.component';
+import {BreweryListComponent} from './components/brewery-list/brewery-list.component';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,8 @@ import { BreweryModalComponent } from './components/modal/brewery-modal.componen
     MatButtonModule,
     MatProgressSpinnerModule,
     MatDialogModule,
-    BreweryModalComponent
+    BreweryModalComponent,
+    BreweryListComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
@@ -67,18 +69,20 @@ export class AppComponent {
     this.loading = true;
     this.currentPage++;
 
-    this.breweryService.searchBreweriesByCity(this.currentCity, this.currentPage).subscribe(
-      (data) => {
+    this.breweryService.searchBreweriesByCity(this.currentCity, this.currentPage).subscribe({
+      next: (data) => {
         this.breweries = [...this.breweries, ...data];
         this.loading = false;
         this.hasMoreItems = data.length === 10; // If we got 10 items, there might be more
       },
-      (error) => {
+      error: (error) => {
         console.error('Error fetching more breweries:', error);
         this.loading = false;
-        this.currentPage--; // Revert page increment on error
-      }
-    );
+      },
+      complete: () => {
+        this.loading = false;
+      },
+    });
   }
 
   showMoreInfo(brewery: Brewery) {

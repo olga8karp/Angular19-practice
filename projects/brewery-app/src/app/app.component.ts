@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnDestroy, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CityInputComponent, HeaderComponent } from '../../../shared-lib/src/app/components';
 import { BreweryService } from './services/brewery.service';
@@ -9,6 +9,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { BreweryModalComponent } from './components/modal/brewery-modal.component';
 import { BreweryListComponent } from './components/brewery-list/brewery-list.component';
 import { Brewery } from './models/brewery.model';
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { CdkPortal, PortalModule } from '@angular/cdk/portal';
 
 @Component({
   selector: 'app-root',
@@ -21,12 +23,13 @@ import { Brewery } from './models/brewery.model';
     MatProgressSpinnerModule,
     MatDialogModule,
     BreweryModalComponent,
-    BreweryListComponent
+    BreweryListComponent,
+    PortalModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy {
   title = 'brewery-app';
   breweries: Brewery[] = [];
   loading = false;
@@ -36,11 +39,10 @@ export class AppComponent {
   hasMoreItems = false;
   selectedBrewery: Brewery | null = null;
   isModalOpen = false;
-
-  constructor(
-    private breweryService: BreweryService
-  ) {
-  }
+  overlay = inject<Overlay>(Overlay);
+  breweryService = inject(BreweryService);
+  portal = viewChild(CdkPortal);
+  private overlayRef: OverlayRef | null = null;
 
   onCitySelected(cityId: string) {
     this.loading = true;
@@ -91,9 +93,41 @@ export class AppComponent {
     this.selectedBrewery = brewery;
     console.log('Show more info for:', brewery.name);
     this.isModalOpen = true;
+
+    // Create the overlay if it doesn't exist
+    if (!this.overlayRef) {
+      const positionStrategy = this.overlay.position()
+        .global()
+        .centerHorizontally()
+        .centerVertically();
+
+      this.overlayRef = this.overlay.create({
+        positionStrategy,
+        hasBackdrop: true,
+        scrollStrategy: this.overlay.scrollStrategies.block()
+      });
+    }
+
+    // Attach the portal to the overlay
+    if (this.overlayRef && !this.overlayRef.hasAttached()) {
+      this.overlayRef.attach(this.portal());
+    }
   }
 
   closeModal() {
     this.isModalOpen = false;
+
+    // Detach the portal from the overlay
+    if (this.overlayRef && this.overlayRef.hasAttached()) {
+      this.overlayRef.detach();
+    }
+  }
+
+  ngOnDestroy() {
+    // Clean up the overlay when the component is destroyed
+    if (this.overlayRef) {
+      this.overlayRef.dispose();
+      this.overlayRef = null;
+    }
   }
 }

@@ -22,7 +22,6 @@ export class BreweryListComponent {
   hasMoreItems = input<boolean>(false);
   selectBrewery = output<Brewery>();
   loadMore = output<void>();
-
   showMoreInfo(brewery: Brewery): void {
     this.selectBrewery.emit(brewery);
   }

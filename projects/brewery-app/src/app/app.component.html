@@ -10,4 +10,6 @@
                   (loadMore)="loadMore()">
 </app-brewery-list>
 
-<app-brewery-modal [isOpen]="isModalOpen" (close)="closeModal()" [brewery]="selectedBrewery"></app-brewery-modal>
+<ng-template cdkPortal>
+  <app-brewery-modal [isOpen]="isModalOpen" (close)="closeModal()" [brewery]="selectedBrewery"></app-brewery-modal>
+</ng-template>

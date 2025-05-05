@@ -1,37 +1,34 @@
-@if (isOpen()) {
-  <div class="backdrop" (click)="onClose()"></div>
-  <div class="modal">
-    <div class="modal-header">
-      <mat-chip class="avatar-chip" selected>
-        {{ brewery()?.name?.[0] }}
-      </mat-chip>
-      <h3>{{ brewery()?.name }}</h3>
-      <button mat-icon-button (click)="onClose()" aria-label="Close modal">
-        <mat-icon>close</mat-icon>
-      </button>
-    </div>
-    <div class="modal-content">
-      <mat-list>
-        <mat-list-item>
-          <div matListItemIcon class="section-icon-container">
-            <mat-icon class="section-icon">star_border</mat-icon>
-          </div>
-          <div matListItemTitle>Type</div>
-          <div matListItemLine>{{ brewery()?.brewery_type }}</div>
-        </mat-list-item>
-      </mat-list>
-      <mat-list>
-        <mat-list-item>
-          <div matListItemIcon class="section-icon-container">
-            <mat-icon class="section-icon">language</mat-icon>
-          </div>
-          <div matListItemTitle>Website</div>
-          <div matListItemLine>{{ brewery()?.website_url }}</div>
-        </mat-list-item>
-      </mat-list>
-    </div>
-    <div class="modal-footer">
-      <button mat-raised-button (click)="onClose()" color="primary">Done</button>
-    </div>
+<div class="modal">
+  <div class="modal-header">
+    <mat-chip class="avatar-chip" selected>
+      {{ brewery()?.name?.[0] }}
+    </mat-chip>
+    <h3>{{ brewery()?.name }}</h3>
+    <button mat-icon-button (click)="onClose()" aria-label="Close modal">
+      <mat-icon>close</mat-icon>
+    </button>
   </div>
-}
+  <div class="modal-content">
+    <mat-list>
+      <mat-list-item>
+        <div matListItemIcon class="section-icon-container">
+          <mat-icon class="section-icon">star_border</mat-icon>
+        </div>
+        <div matListItemTitle>Type</div>
+        <div matListItemLine>{{ brewery()?.brewery_type }}</div>
+      </mat-list-item>
+    </mat-list>
+    <mat-list>
+      <mat-list-item>
+        <div matListItemIcon class="section-icon-container">
+          <mat-icon class="section-icon">language</mat-icon>
+        </div>
+        <div matListItemTitle>Website</div>
+        <div matListItemLine>{{ brewery()?.website_url }}</div>
+      </mat-list-item>
+    </mat-list>
+  </div>
+  <div class="modal-footer">
+    <button mat-raised-button (click)="onClose()" color="primary">Done</button>
+  </div>
+</div>

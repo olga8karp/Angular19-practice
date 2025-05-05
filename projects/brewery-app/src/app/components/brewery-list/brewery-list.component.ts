@@ -2,7 +2,7 @@ import { Component, input, output } from '@angular/core';
 import { MatButton, MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { Brewery } from '../../services/brewery.service';
+import { Brewery } from '../../models/brewery.model';
 
 @Component({
   selector: 'app-brewery-list',

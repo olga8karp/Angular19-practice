@@ -1,5 +1,4 @@
 import { Component, input, output } from '@angular/core';
-import { Brewery } from '../../services/brewery.service';
 import { MatChip } from '@angular/material/chips';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -8,6 +7,7 @@ import {
   MatListItemLine,
   MatListItemTitle,
 } from '@angular/material/list';
+import {Brewery} from '../../models/brewery.model';
 
 @Component({
   selector: 'app-brewery-modal',

@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent, CityInputComponent } from '../../../shared-lib/src/app/components';
-import { BreweryService, Brewery } from './services/brewery.service';
+import { BreweryService } from './services/brewery.service';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BreweryModalComponent } from './components/modal/brewery-modal.component';
-import {BreweryListComponent} from './components/brewery-list/brewery-list.component';
+import { BreweryListComponent } from './components/brewery-list/brewery-list.component';
+import {Brewery} from './models/brewery.model';
 
 @Component({
   selector: 'app-root',

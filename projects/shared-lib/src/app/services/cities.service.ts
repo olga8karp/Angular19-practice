@@ -1,12 +1,11 @@
-import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Injectable, Signal, signal } from '@angular/core';
 import { City } from '../models/city.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CitiesService {
-  private cities: City[] = [
+  private cities = signal<City[]>([
     { name: "Aberdeen", id: "aberdeen" },
     { name: "Abilene", id: "abilene" },
     { name: "Akron", id: "akron" },
@@ -234,9 +233,9 @@ export class CitiesService {
     { name: "Winston-Salem", id: "winston-salem" },
     { name: "Worcester", id: "worcester" },
     { name: "Yonkers", id: "yonkers" }
-  ];
+  ]);
 
-  getCities(): Observable<City[]> {
-    return of(this.cities);
+  getCities(): Signal<City[]> {
+    return this.cities.asReadonly();
   }
 }

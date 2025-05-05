@@ -6,7 +6,8 @@ import { Observable, map, startWith } from 'rxjs';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { City, CitiesService } from '../../services';
+import { CitiesService } from '../../services';
+import { City } from '../../models/city.model';
 
 @Component({
   selector: 'lib-city-input',

@@ -7,7 +7,7 @@ import {
   MatListItemLine,
   MatListItemTitle,
 } from '@angular/material/list';
-import {Brewery} from '../../models/brewery.model';
+import { Brewery } from '../../models/brewery.model';
 
 @Component({
   selector: 'app-brewery-modal',

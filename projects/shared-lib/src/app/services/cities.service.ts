@@ -1,10 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-
-export interface City {
-  name: string; // Human readable city name
-  id: string;   // Underscore-separated id for search
-}
+import { City } from '../models/city.model';
 
 @Injectable({
   providedIn: 'root'

@@ -1,4 +1,4 @@
-import { Component, OnInit, signal, Signal, input, output } from '@angular/core';
+import { Component, OnInit, signal, Signal, input, output, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Observable, map, startWith } from 'rxjs';
@@ -30,8 +30,7 @@ export class CityInputComponent implements OnInit {
   cityObjectSelected = output<City>();
   cityControl = new FormControl<string | City | null>('');
   filteredCities: Observable<City[]> | undefined;
-
-  constructor(private citiesService: CitiesService) {}
+  private citiesService = inject(CitiesService);
 
   ngOnInit() {
       this.cities = this.citiesService.getCities();

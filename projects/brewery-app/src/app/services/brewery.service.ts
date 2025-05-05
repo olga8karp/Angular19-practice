@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Brewery } from '../models/brewery.model';
@@ -8,8 +8,7 @@ import { Brewery } from '../models/brewery.model';
 })
 export class BreweryService {
   private apiUrl = 'https://api.openbrewerydb.org/v1/breweries';
-
-  constructor(private http: HttpClient) { }
+  private http = inject(HttpClient);
 
   /**
    * Search breweries by city with pagination

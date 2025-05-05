@@ -1,11 +1,11 @@
-@if (isOpen) {
+@if (isOpen()) {
   <div class="backdrop" (click)="onClose()"></div>
   <div class="modal">
     <div class="modal-header">
       <mat-chip class="avatar-chip" selected>
-        {{ brewery?.name?.[0] }}
+        {{ brewery()?.name?.[0] }}
       </mat-chip>
-      <h3>{{ brewery?.name }}</h3>
+      <h3>{{ brewery()?.name }}</h3>
       <button mat-icon-button (click)="onClose()" aria-label="Close modal">
         <mat-icon>close</mat-icon>
       </button>
@@ -17,7 +17,7 @@
             <mat-icon class="section-icon">star_border</mat-icon>
           </div>
           <div matListItemTitle>Type</div>
-          <div matListItemLine>{{ brewery?.brewery_type }}</div>
+          <div matListItemLine>{{ brewery()?.brewery_type }}</div>
         </mat-list-item>
       </mat-list>
       <mat-list>
@@ -26,7 +26,7 @@
             <mat-icon class="section-icon">language</mat-icon>
           </div>
           <div matListItemTitle>Website</div>
-          <div matListItemLine>{{ brewery?.website_url }}</div>
+          <div matListItemLine>{{ brewery()?.website_url }}</div>
         </mat-list-item>
       </mat-list>
     </div>

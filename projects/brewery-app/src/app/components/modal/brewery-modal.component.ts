@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { Brewery } from '../../services/brewery.service';
 import { MatChip } from '@angular/material/chips';
 import { MatButton, MatIconButton } from '@angular/material/button';
@@ -25,9 +25,9 @@ import {
   styleUrls: ['./brewery-modal.component.css']
 })
 export class BreweryModalComponent {
-  @Input() brewery: Brewery | null = null;
-  @Input() isOpen: boolean = false;
-  @Output() close = new EventEmitter<void>();
+  brewery = input<Brewery | null>(null);
+  isOpen = input<boolean>(false);
+  close = output<void>();
 
   onClose(): void {
     this.close.emit();

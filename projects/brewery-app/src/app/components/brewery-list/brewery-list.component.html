@@ -1,10 +1,4 @@
 <div class="brewery-results">
-  @if (loading()) {
-    <div class="loading">
-      <mat-spinner diameter="40"></mat-spinner>
-      <p>Loading breweries...</p>
-    </div>
-  }
   @if (noResults()) {
     <div class="no-results">No breweries found for this city.</div>
   }
@@ -29,7 +23,7 @@
       }
     </div>
 
-    @if (hasMoreItems()) {
+    @if (!loading() && hasMoreItems()) {
       <div class="load-more-container">
         <button mat-raised-button color="basic" (click)="loadMoreItems()" [disabled]="loading()">
           @if (loading()) {
@@ -40,5 +34,11 @@
         </button>
       </div>
     }
+  }
+  @if (loading()) {
+    <div class="loading">
+      <mat-spinner diameter="40"></mat-spinner>
+      <p>Loading breweries...</p>
+    </div>
   }
 </div>
